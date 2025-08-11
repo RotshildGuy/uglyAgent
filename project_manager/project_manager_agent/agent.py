@@ -210,8 +210,7 @@ def _get_initialized_pm_agent_sync():
         # Hardcoded URLs for the friend agents
         agents_urls = [
             "http://localhost:10002",  # requirements_agent
-            # "http://localhost:10003",  # Nate's Agent
-            # "http://localhost:10004",  # Kaitlynn's Agent
+            "http://localhost:10003",  # document_generation_agent
         ]
 
         print("initializing PM agent")
