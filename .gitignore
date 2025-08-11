@@ -1,0 +1,8 @@
+# Caches
+__pycache__/
+
+# Environment files
+.env
+
+# Virtual environment directory
+.venv/
