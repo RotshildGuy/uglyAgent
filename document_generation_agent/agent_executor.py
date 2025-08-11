@@ -1,4 +1,4 @@
-# The code for this file is identical to the one in requirements_agent/agent_executor.py
+# The code for this file is identical to the one in document_generation_agent/agent_executor.py
 # You can copy the file directly.
 import logging
 from collections.abc import AsyncGenerator
