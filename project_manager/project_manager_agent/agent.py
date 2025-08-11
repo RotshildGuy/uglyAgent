@@ -24,10 +24,6 @@ from google.adk.sessions import InMemorySessionService
 from google.adk.tools.tool_context import ToolContext
 from google.genai import types
 
-# from .pickleball_tools import (
-#     book_pickleball_court,
-#     list_court_availabilities,
-# )
 from .remote_agent_connection import RemoteAgentConnections
 
 load_dotenv()
@@ -93,8 +89,6 @@ class PMAgent:
             description="The PM (Project Manager) Agent is the central orchestrator and user interface of the multi-agent system. Its primary role is to manage the project lifecycle from initiation to completion, gathering requirements and delegating tasks to specialized agents.",
             tools=[
                 self.send_message,
-                # book_pickleball_court,
-                # list_court_availabilities,
             ],
         )
 
@@ -103,7 +97,7 @@ class PMAgent:
         **Role:** You are the Project Manager. Your job is to orchestrate the project workflow by delegating tasks to other agents.
 
             **Instructions:**
-            1.  **Requirements Gathering:** When the user provides a project idea, call the `requirements_agent` tool with the user's project description.
+            1.  **Requirements Gathering:** When the user provides a project idea, call the `requirements_agent` tool with the user's project description, wait for the respond and send it to the user.
             2.  **Loop for Clarification:** If the `requirements_agent` indicates that information is missing or needs clarification, you **MUST** relay that request to the user. Continue this loop until the `requirements_agent` confirms all requirements are complete.
             3.  **Initiate Document Generation:** Once the `requirements_agent` confirms all specifications are complete, you **MUST** call the `document_generation_agent` tool (if available) with the finalized requirements to create the PRD.
             4.  **Final Delivery:** Once the document is generated (or if a specific agent provides the final output), present the complete PRD to the user and ask for their final approval.
@@ -156,7 +150,7 @@ class PMAgent:
                 }
 
     async def send_message(self, agent_name: str, task: str, tool_context: ToolContext):
-        """Sends a task to a remote friend agent."""
+        """Sends a task to a remote agent."""
         if agent_name not in self.remote_agent_connections:
             raise ValueError(f"Agent {agent_name} not found")
         client = self.remote_agent_connections[agent_name]
